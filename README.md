@@ -1,4 +1,4 @@
-### OCScripts ###
+# OCScripts #
 
 A host of scripts for OpenComputers, the advanced version of ComputerCraft
 These scripts at least work on OpenOS, I haven't experimented with Plan9K yet, so don't kill me if they don't work on it.
@@ -7,7 +7,7 @@ These scripts at least work on OpenOS, I haven't experimented with Plan9K yet, s
 
 All of the programs require working graphics components (screen & GPU or accelerated CPU)
 
-# port_open, port_close, port_check #
+### port_open, port_close, port_check ###
 
 Usage:
     port_open <port>
@@ -21,7 +21,7 @@ Meant to be used with both servers and clients (mostly clients for some reason) 
 If no port is defined for port_check, it scans all open ports within the range of 1 to 10000
 Otherwise it tells you whether the specified port is open or closed
 
-# network_broadcast #
+### network_broadcast ###
 
 Usage: network_broadcast <port> <message>
 
@@ -29,7 +29,7 @@ Usage: network_broadcast <port> <message>
 
 Broadcasts messages via the specified port
 
-# network_messagedisplay #
+### network_messagedisplay ###
 
 Usage: network_messagedisplay
 
@@ -39,7 +39,7 @@ Opens a message display with a reduced resolution to make reading of messages ea
 Best used on the back wall of a huge factory or to send hilarious messages via twitter
 Once you exit the program (ctrl + alt + C), the resolution won't change back, so you'll have to change it back in the interactive lua prompt by typing "local x, y = component.gpu.maxResolution() component.gpu.setResolution(x, y)"
 
-# displaymanager #
+### displaymanager ###
 
 Usage: displaymanager screen|port <component address or part of it>
 
