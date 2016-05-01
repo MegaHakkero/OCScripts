@@ -22,6 +22,7 @@ Meant to be used with both servers and clients (mostly clients for some reason) 
 If no port is defined for port_check, it scans all open ports within the range of 1 to 10000.
 Otherwise it tells you whether the specified port is open or closed
 
+
 ### network_broadcast ###
 
 Usage:
@@ -31,6 +32,7 @@ Usage:
 - A working network card, wireless or not
 
 Broadcasts messages via the specified port
+
 
 ### network_messagedisplay ###
 
@@ -43,6 +45,7 @@ Usage:
 Opens a message display with a reduced resolution to make reading of messages easier without getting close to the screen.
 Best used on the back wall of a huge factory or to send hilarious messages via twitter.
 Once you exit the program (ctrl + alt + C), the resolution won't change back, so you'll have to change it back in the interactive lua prompt by typing "local x, y = component.gpu.maxResolution() component.gpu.setResolution(x, y)"
+
 
 ### displaymanager ###
 
