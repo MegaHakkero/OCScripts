@@ -18,8 +18,8 @@ Usage:
 
 They open, close and check for open network ports, in that order.
 Meant to be used with both servers and clients (mostly clients for some reason) for message transmission.
-If no port is defined for port_check, it scans all open ports within the range of 1 to 10000,
-otherwise it tells you whether the specified port is open or closed
+If no port is defined for port_check, it scans all open ports within the range of 1 to 10000.
+Otherwise it tells you whether the specified port is open or closed
 
 ### network_broadcast ###
 
