@@ -10,11 +10,9 @@ All of the programs require working graphics components (screen & GPU or acceler
 ### port_open, port_close, port_check ###
 
 Usage:
-    port_open <port>
-    
-    port_close <port>
-    
-    port_check [port]
+    port_open <port>  
+    port_close <port>  
+    port_check [port]  
 
 - A working network card, wireless or not
 
@@ -25,7 +23,8 @@ Otherwise it tells you whether the specified port is open or closed
 
 ### network_broadcast ###
 
-Usage: network_broadcast <port> <message>
+Usage:
+    network_broadcast <port> <message>  
 
 - A working network card, wireless or not
 
@@ -33,7 +32,8 @@ Broadcasts messages via the specified port
 
 ### network_messagedisplay ###
 
-Usage: network_messagedisplay
+Usage:
+    network_messagedisplay  
 
 - A working network card, wireless or not
 
