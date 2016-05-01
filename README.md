@@ -10,8 +10,8 @@ All of the programs require working graphics components (screen & GPU or acceler
 ### port_open, port_close, port_check ###
 
 Usage:
-    port_open <port>
-    port_close <port>
+    port_open <port>\n
+    port_close <port>\n
     port_check [port]
 
 - A working network card, wireless or not
