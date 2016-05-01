@@ -5,7 +5,7 @@ local gpu = component.gpu
 local args = shell.parse(...)
 
 if #args < 2 then
-  print("Usage: displaymanager <screen | gpu> <address>")
+  print("Usage: displaymanager screen|gpu <address>")
   return
 else
   if args[1] == "screen" then
