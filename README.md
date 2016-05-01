@@ -57,5 +57,7 @@ Once you exit the program (ctrl + alt + C), the resolution won't change back, so
 Usage:
 
     displaymanager screen|port <component address or part of it>
+    
+- No requirements
 
 Binds CPUs to screens or selects the primary CPU on the fly if you have several ones
