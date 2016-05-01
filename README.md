@@ -1,6 +1,6 @@
 # OCScripts #
 
-A host of scripts for OpenComputers, the advanced version of ComputerCraft.
+A host of scripts for OpenComputers, the advanced version of the Minecraft mod known as ComputerCraft.
 These scripts at least work on OpenOS; I haven't experimented with Plan9K yet, so don't kill me if they don't work on it.
 
 ## Usage, requirements & info ##
