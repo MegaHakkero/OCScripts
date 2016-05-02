@@ -56,7 +56,7 @@ Once you exit the program (ctrl + alt + C), the resolution won't change back, so
 
 Usage:
 
-    displaymanager screen|port <component address or part of it>
+    displaymanager screen|gpu <component address or part of it>
     
 - No requirements
 
