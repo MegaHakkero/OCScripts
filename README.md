@@ -58,7 +58,7 @@ Usage:
 
     displaymanager screen|gpu <component address or part of it>
     
-- No requirements
+- No additional requirements
 
 Binds CPUs to screens or selects the primary CPU on the fly if you have several ones
 
@@ -70,6 +70,6 @@ Usage:
 
     dhcpcd
     
-- No requirements
+- No additional requirements
 
 Assigns a random IPv4 address to your computer. The numbers are completely random between 0 and 255 just like real IPv4. It doesn't detect for overlapping addresses though so don't kill me if you get several computers with the same address (that's take like 14234234 computers on the same network anyway)
