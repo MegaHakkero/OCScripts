@@ -1,4 +1,3 @@
-local event = require("event")
 local serialize = require("serialization")
 local component = require("component")
 
@@ -14,6 +13,10 @@ end
 
 for i = 1, 8, 1 do
   mactable[i] = tostring(math.random(0, 99))
+  
+  if string.len(mactable[i]) < 2 then
+    mactable[i] = "0" .. mactable[i]
+  end
 end
 
 local address = ipaddresstable[1] .. "." .. ipaddresstable[2] .. "." .. ipaddresstable[3] .. "." .. ipaddresstable[4]
