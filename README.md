@@ -70,6 +70,6 @@ Usage:
 
     dhcpcd
     
-- No additional requirements
+- A working network card, wireless or not
 
-Assigns random IPv4 and MAC address to your computer and creates network interfaces into /etc/ifaces in an object form. The IPv4 address' numbers are completely random between 0 and 255 just like real IPv4 and the MAC addresses are 0-99 per segment (No hexadecimals). It doesn't detect for overlapping addresses though so don't kill me if you get several computers with the same address (that would take like 14234234 computers on the same network anyway)
+Assigns random IPv4 and MAC addresses to your computer and creates network interfaces into /etc/ifaces in an object form. The IPv4 addresses are numbers completely random between 0 and 255 per segment just like real IPv4. The MAC addresses are numbers between 0 and 99 per segment (No hexadecimals). It doesn't detect for overlapping addresses though so don't kill me if you get several computers with the same address (that would take like 14234234 computers on the same network anyway)
