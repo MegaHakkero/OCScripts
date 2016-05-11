@@ -1,5 +1,6 @@
 local serialize = require("serialization")
 local component = require("component")
+local rc = require("rc")
 
 local ipaddresstable = {}
 local mactable = {}
@@ -75,10 +76,21 @@ ifacefile:close()
 ifacefile = io.open("/etc/ifaces", "a")
 
 for i = 1, #ifacetable, 1 do
-  ifacefile:write("local " .. ifacetable[i].name .. " = " .. serialize.serialize(ifacetable[i], false) .. "\n")
+  ifacefile:write(ifacetable[i].name .. " = " .. serialize.serialize(ifacetable[i], false) .. "\n")
 end
 
 ifacefile:close()
 
 print("Finished loading network interfaces")
 print("Generating packet daemons")
+
+local rxcode = [[ "" ]]
+
+packetdaemon = io.open("/etc/rc.d/rxdaemon.lua", "w")
+
+packetdaemon:write(rxcode)
+
+packetdaemon:close()
+
+rc.run("rxdaemon", "start")
+rc.run("rxdaemon", "enable")
