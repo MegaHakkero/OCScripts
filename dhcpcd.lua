@@ -12,7 +12,7 @@ for i = 1, 4, 1 do
   ipaddresstable[i] = tostring(math.random(0, 255))
 end
 
-for i = 1, 8, 1 do
+for i = 1, 6, 1 do
   mactable[i] = tostring(math.random(0, 99))
   
   if string.len(mactable[i]) < 2 then
@@ -20,9 +20,11 @@ for i = 1, 8, 1 do
   end
 end
 
+for i =
+
 local address = ipaddresstable[1] .. "." .. ipaddresstable[2] .. "." .. ipaddresstable[3] .. "." .. ipaddresstable[4]
 local bcast = ipaddresstable[1] .. "." .. ipaddresstable[2] .. "." .. ipaddresstable[3] .. ".255"
-local mac = mactable[1] .. ":" .. mactable[2] .. ":" .. mactable[3] .. ":" .. mactable[4] .. ":" .. mactable[5] .. ":" .. mactable[6] .. ":" .. mactable[7] .. ":" .. mactable[8]
+local mac = mactable[1] .. ":" .. mactable[2] .. ":" .. mactable[3] .. ":" .. mactable[4] .. ":" .. mactable[5] .. ":" .. mactable[6]
 
 print("Assigning IPv4 address: " .. address)
 print("MAC address: " .. mac)
@@ -31,7 +33,7 @@ component.computer.address = address
 component.computer.bcast = bcast
 component.computer.mac = mac
 
-if component.modem == nil then
+if component.isAvailable("modem") == false then
   print("Error: Network card not installed")
   return
 end
@@ -44,8 +46,6 @@ ifacetable[1] = {
   addr = address,
   hwaddr = mac,
   broadcast = bcast,
-  mtu = 1500,
-  scope = "Link",
   submask = "255.255.255.0",
   flags = {"UP", "BROADCAST", "RUNNING", "MULTICAST"},
   rx = 0
@@ -59,8 +59,6 @@ if component.modem.isWireless() == true then
     addr = address,
     hwaddr = mac,
     broadcast = bcast,
-    mtu = 1500,
-    scope = "Link",
     submask = "255.255.255.0",
     flags = {"UP", "BROADCAST", "RUNNING", "MULTICAST"},
     rx = 0
@@ -81,16 +79,38 @@ end
 
 ifacefile:close()
 
-print("Finished loading network interfaces")
-print("Generating packet daemons")
+print("Done loading network interfaces")
+print("Generating rxdaemon")
 
-local rxcode = [[ "" ]]
+local rxcode = [[ 
+  local event = require("event")
+  local rxfile = io.open("/etc/rxpackets", "r")
+  
+  local rxpackets = rxfile:read("*a")
+  rxfile:close()
+  
+  function start()
+    event.listen("modem_message", writeReceivedPackets())
+  end
+  
+  function writeReceivedPackets()
+    rxpackets = rxpackets + 1
+    
+    rxfile = io.open("/etc/rxpackets", "w")
+    rxfile:write(rxpackets)
+    rxfile:close()
+  end
+]]
 
-packetdaemon = io.open("/etc/rc.d/rxdaemon.lua", "w")
+local rxdaemon = io.open("/etc/rc.d/rxdaemon.lua", "w")
 
-packetdaemon:write(rxcode)
+rxdaemon:write(rxcode)
 
-packetdaemon:close()
+rxdaemon:close()
 
-rc.run("rxdaemon", "start")
-rc.run("rxdaemon", "enable")
+print("Loading rxdaemon")
+
+rc.runCommand("rxdaemon", "start")
+rc.runCommand("rxdaemon", "enable")
+
+print("Done")
