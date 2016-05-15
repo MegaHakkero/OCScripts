@@ -1,6 +1,5 @@
 local serialize = require("serialization")
 local component = require("component")
-local rc = require("rc")
 
 local ipaddresstable = {}
 local mactable = {}
@@ -79,15 +78,15 @@ print("Generating RXDaemon")
 local rxcode = [[ 
   local event = require("event")
   
-  function ResetRXPackets()
+  local function ResetRXPackets()
     local rxfile = io.open("/etc/rxpackets", "w")
     rxfile:write(tostring(0))
     rxfile:close()
   end
   
-  function WriteReceivedPackets()
+  local function WriteReceivedPackets()
     rxfile = io.open("/etc/rxpackets", "r")
-    local rxpackets = tonumber(rxfile:read("*a"))
+    local rxpackets = tonumber(rxfile:read())
     
     rxfile:close()
     
@@ -99,6 +98,7 @@ local rxcode = [[
   end
   
   function start()
+    ResetRXPackets()
     print("RXDaemon: initializing...")
     event.listen("modem_message", WriteReceivedPackets)
   end
@@ -109,10 +109,34 @@ local rxdaemon = io.open("/etc/rc.d/rxdaemon.lua", "w")
 rxdaemon:write(rxcode)
 rxdaemon:close()
 
-print("Running RXDaemon")
+print("Loading RC config")
 
-rc.runCommand("rxdaemon", "ResetRXPackets")
-rc.runCommand("rxdaemon", "start")
-rc.runCommand("rxdaemon", "enable")
+dofile("/etc/rc.cfg")
+
+local enabled = enabled
+
+if enabled[1] ~= nil then
+
+  for t = 1, #enabled, 1 do
+    if enabled[t] == "rxdaemon" then
+      enabled[t] = nil
+    end
+  end
+
+  local rccfgindex = #enabled + 1
+  enabled[rccfgindex] = "rxdaemon"
+else
+  enabled[1] = "rxdaemon"
+end
+
+local rccfg = io.open("/etc/rc.cfg", "w")
+rccfg:write("enabled = " .. serialize.serialize(enabled, false))
+rccfg:close()
+
+rccfg = io.open("/etc/rc.cfg", "a")
+rccfg:write("\n\nrxdaemon = start\n")
+rccfg:close()
 
 print("Done")
+print("Run 'rc' from the command line to start RXDaemon")
+print("It collects received packets (= network messages)")
