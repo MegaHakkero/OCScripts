@@ -73,3 +73,6 @@ Usage:
 - A working network card, wireless or not
 
 Assigns random IPv4 and MAC addresses to your computer and creates network interfaces into /etc/ifaces in an object form. The IPv4 addresses are numbers completely random between 0 and 255 per segment just like real IPv4. The MAC addresses are numbers between 0 and 99 per segment (No hexadecimals). It doesn't detect for overlapping addresses though so don't kill me if you get several computers with the same address (that would take like 14234234 computers on the same network anyway)
+
+IMPORTANT
+dhcpcd.lua only changes component.computer.address, which is a variable assigned by the operating system's initialization process, to change the computer's IPv4 address because there currently is no methods to "officially" set the computer's main address. This means that the variable gets reset to it's original value after each reboot and you need to run dhcpcd every time you turn your computer on. Also, the addresses are only registered locally, which means that every other computer in the network has to interact with your computer by using your original address even if you have run dhcpcd, making the program quite useless. I've contacted Sangar (the lead developer of OpenComputers) about this on Twitter, asking for a method to permanently set the computer's address.
